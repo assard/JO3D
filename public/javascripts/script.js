@@ -1,3 +1,6 @@
+import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import { GLTFLoader } from 'https://unpkg.com/three/examples/jsm/loaders/GLTFLoader.js';
+
 const viewerDiv = document.getElementById('viewerDiv');
 const position = {
     coord: new itowns.Coordinates('EPSG:4326', 2.3488, 48.8534),
@@ -34,3 +37,11 @@ const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
 });
 
 view.addLayer(elevationLayer);
+
+async function loadGLTF(){
+    let gltfLoader = new GLTFLoader();
+    let gltf = await gltfLoader.load('../data/aviva_stadium/scene.gltf');
+    console.log(gltf);
+}
+
+loadGLTF();
