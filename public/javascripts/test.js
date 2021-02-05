@@ -1,7 +1,7 @@
 const viewerDiv = document.getElementById('viewerDiv');
 const position = {
-    coord: new itowns.Coordinates('EPSG:4326', 2.35, 48.8),
-    range: 25e6
+    coord: new itowns.Coordinates('EPSG:4326', 2.3488, 48.8534),
+    range: 25000
 };
 const view = new itowns.GlobeView(viewerDiv, position);
 
