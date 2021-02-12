@@ -1,6 +1,6 @@
 const viewerDiv = document.getElementById('viewerDiv');
 const placement = {
-    coord: new itowns.Coordinates('EPSG:4326', 2.35, 48.8),
+    coord: new itowns.Coordinates('EPSG:4326', 2.338, 48.859),
     range: 1E3
 };
 const view = new itowns.GlobeView(viewerDiv, placement);
@@ -13,8 +13,6 @@ const elevationSource = new itowns.WMTSSource({
     format: 'image/x-bil;bits=32',
     zoom: {min: 3, max: 10}
 });
-
-
 
 const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
     source: elevationSource,
@@ -52,6 +50,10 @@ function setColorGreen(properties) {
     return new itowns.THREE.Color(0x00ff00);
 }
 
+function setColorYellow(properties) {
+    return new itowns.THREE.Color(0xffff00);
+}
+
 function setColorBlue(properties) {
     return new itowns.THREE.Color(0x0000ff);
 }
@@ -60,6 +62,12 @@ const geometrySourceIndifferencie = new itowns.WFSSource({
     url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wfs?',
     typeName: 'BDTOPO_BDD_WLD_WGS84G:bati_indifferencie',
     crs: 'EPSG:4326',
+    extent: {
+        west: 2.200,
+        east: 2.500,
+        south: 48.750,
+        north: 48.950,
+    },
 });
 
 const geometryLayerIndifferencie = new itowns.GeometryLayer('BuildingsIndifferencie', new itowns.THREE.Group(), {
@@ -79,6 +87,12 @@ const geometrySourceIndustriel = new itowns.WFSSource({
     url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wfs?',
     typeName: 'BDTOPO_BDD_WLD_WGS84G:bati_industriel',
     crs: 'EPSG:4326',
+    extent: {
+        west: 2.200,
+        east: 2.500,
+        south: 48.750,
+        north: 48.950,
+    },
 });
 
 const geometryLayerIndustriel = new itowns.GeometryLayer('BuildingsIndustriel', new itowns.THREE.Group(), {
@@ -94,10 +108,41 @@ const geometryLayerIndustriel = new itowns.GeometryLayer('BuildingsIndustriel', 
 
 view.addLayer(geometryLayerIndustriel);
 
+const geometrySourceRemarquable = new itowns.WFSSource({
+    url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wfs?',
+    typeName: 'BDTOPO_BDD_WLD_WGS84G:bati_remarquable',
+    crs: 'EPSG:4326',
+    extent: {
+        west: 2.200,
+        east: 2.500,
+        south: 48.750,
+        north: 48.950,
+    },
+});
+
+const geometryLayerRemarquable = new itowns.GeometryLayer('BuildingsRemarquable', new itowns.THREE.Group(), {
+    source: geometrySourceRemarquable,
+    update: itowns.FeatureProcessing.update,
+    convert: itowns.Feature2Mesh.convert({
+        altitude: setAltitude,
+        extrude: setExtrusion,
+        color: setColorYellow
+    }),
+    zoom: { min: 14 },
+});
+
+view.addLayer(geometryLayerRemarquable);
+
 const geometrySourceTerrainSport = new itowns.WFSSource({
     url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wfs?',
     typeName: 'BDTOPO_BDD_WLD_WGS84G:terrain_sport',
     crs: 'EPSG:4326',
+    extent: {
+        west: 2.200,
+        east: 2.500,
+        south: 48.750,
+        north: 48.950,
+    },
 });
 
 const geometryLayerTerrainSport = new itowns.GeometryLayer('BuildingsTerrainSport', new itowns.THREE.Group(), {
