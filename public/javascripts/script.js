@@ -40,8 +40,23 @@ view.addLayer(elevationLayer);
 
 async function loadGLTF(){
     let gltfLoader = new GLTFLoader();
-    let gltf = await gltfLoader.load('../data/aviva_stadium/scene.gltf');
-    console.log(gltf);
+    gltfLoader.load('../data/aviva_stadium/scene.gltf', gltf => {
+        console.log(gltf);
+
+        //Base on the example https://github.com/iTowns/itowns/blob/master/examples/misc_collada.html
+
+        //Get the ThreeGroup
+        let model = gltf.scene;
+
+        //Building coordinate
+        let coord = new itowns.Coordinates('EPSG:4326',48.924444,2.36,46);
+
+        //Set the model position to the coord define before
+        model.position.copy(coord.as(view.referenceCrs));
+
+        //Align up vector with geodesic normal
+        model.lookAt(model.position.clone().add(coord.geodesicNormal));
+    });
 }
 
 loadGLTF();
