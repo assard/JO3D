@@ -5,36 +5,56 @@ const placement = {
 };
 const view = new itowns.GlobeView(viewerDiv, placement);
 
-const elevationSource = new itowns.WMTSSource({
-    url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wmts',
-    crs: 'EPSG:4326',
-    name: 'ELEVATION.ELEVATIONGRIDCOVERAGE.SRTM3',
-    tileMatrixSet: 'WGS84G',
-    format: 'image/x-bil;bits=32',
-    zoom: {min: 3, max: 10}
-});
+// const elevationSource = new itowns.WMTSSource({
+//     url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wmts',
+//     crs: 'EPSG:4326',
+//     name: 'ELEVATION.ELEVATIONGRIDCOVERAGE.SRTM3',
+//     tileMatrixSet: 'WGS84G',
+//     format: 'image/x-bil;bits=32',
+//     zoom: {min: 3, max: 10}
+// });
 
 
 
-const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
-    source: elevationSource,
-});
+// const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
+//     source: elevationSource,
+// });
 
-view.addLayer(elevationLayer);
+// view.addLayer(elevationLayer);
 
-const colorSource = new itowns.WMTSSource({
-    url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wmts',
-    crs: 'EPSG:3857',
-    name: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGN',
-    tileMatrixSet: 'PM',
-    format: 'image/jpeg'
-});
 
-const colorLayer = new itowns.ColorLayer('Ortho', {
-    source: colorSource,
-});
 
-view.addLayer(colorLayer);
+// const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
+//     source: mapLayerSource,
+// });
+
+// view.addLayer(elevationLayer);
+
+// const colorSource = new itowns.WMTSSource({
+//     url: 'http://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wmts',
+//     crs: 'EPSG:3857',
+//     name: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGN',
+//     tileMatrixSet: 'PM',
+//     format: 'image/jpeg'
+// });
+
+// const colorLayer = new itowns.ColorLayer('Ortho', {
+//     source: colorSource,
+// });
+
+// view.addLayer(colorLayer);
+
+const mapSource = new itowns.WMTSSource({
+    url: '../data/wmts-osm.xml',
+    name: 'OpenStreetMap plan',
+    crs: 'EPSG:4326'
+})
+
+const mapLayer = new itowns.ColorLayer('Ortho', {
+    source: mapSource
+})
+
+view.addLayer(mapLayer);
 
 function setAltitude(properties) {
     return -properties.hauteur;
