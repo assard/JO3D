@@ -1,7 +1,7 @@
 const viewerDiv = document.getElementById('viewerDiv');
 const position = {
-    coord: new itowns.Coordinates('EPSG:4326', 2.36,48.924444),
-    range: 2000
+    coord: new itowns.Coordinates('EPSG:4326', 2.25359366707031848,84595076292729),
+    range: 30000
 };
 const view = new itowns.GlobeView(viewerDiv, position);
 
@@ -36,7 +36,7 @@ const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
 view.addLayer(elevationLayer);
 
 
-async function loadComplex(dataPath,coordinates,rotateX,rotateY,rotateZ,scaleX,scaleY,scaleZ){
+async function loadComplex(dataPath,coords,rotateX,rotateY,rotateZ,scaleX,scaleY,scaleZ){
 
 
     let gltf = await ThreeLoader.load('GLTF',dataPath);
@@ -46,12 +46,14 @@ async function loadComplex(dataPath,coordinates,rotateX,rotateY,rotateZ,scaleX,s
     //Get the ThreeGroup
     let model = gltf.scene;
 
+    let coord = new itowns.coordinates('EPSG:4326',coords.lng,coords.lat,coords.alt);
+
 
     //Set the model position to the coord define before
-    model.position.copy(coordinates.as(view.referenceCrs));
+    model.position.copy(coord.as(view.referenceCrs));
 
     //Align up vector with geodesic normal
-    model.lookAt(model.position.clone().add(coordinates.geodesicNormal));
+    model.lookAt(model.position.clone().add(coord.geodesicNormal));
 
     // user rotate building to align with ortho image
     model.rotateZ(rotateZ);
@@ -66,9 +68,25 @@ async function loadComplex(dataPath,coordinates,rotateX,rotateY,rotateZ,scaleX,s
 }
 
 //Load Stade de France
+
+stdfCoord = {
+    lng : 2.36,
+    lat : 48.924444,
+    alt : 46
+}
+
 loadComplex('../data/aviva_stadium/scene.gltf',
-            new itowns.Coordinates('EPSG:4326',2.36,48.924444,46),
+            stdfCoord,
             Math.PI/2,
             Math.PI/8,
             -Math.PI/12,
             0.002, 0.002, 0.002);
+
+//Load Tennis Court
+loadComplex('../data/aviva_stadium/scene.gltf',
+            new itowns.Coordinates('EPSG:4326', 2.25,48.845950,46),
+            Math.PI/2,
+            0,
+            0,
+            1, 1, 1);
+
