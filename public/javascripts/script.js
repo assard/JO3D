@@ -1,6 +1,3 @@
-// import * as THREE from 'https://unpkg.com/three/build/three.module.js';
-// import { GLTFLoader } from 'https://unpkg.com/three/examples/jsm/loaders/GLTFLoader.js';
-
 const viewerDiv = document.getElementById('viewerDiv');
 const position = {
     coord: new itowns.Coordinates('EPSG:4326', 2.36,48.924444),
@@ -38,39 +35,40 @@ const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
 
 view.addLayer(elevationLayer);
 
-async function loadGLTF(){
+
+async function loadComplex(dataPath,coordinates,rotateX,rotateY,rotateZ,scaleX,scaleY,scaleZ){
 
 
-    let gltf = await ThreeLoader.load('GLTF','../data/aviva_stadium/scene.gltf');
+    let gltf = await ThreeLoader.load('GLTF',dataPath);
 
     //Base on the example https://github.com/iTowns/itowns/blob/master/examples/misc_collada.html
 
     //Get the ThreeGroup
     let model = gltf.scene;
 
-    //Building coordinate
-    let coord = new itowns.Coordinates('EPSG:4326',2.36,48.924444,46);
 
     //Set the model position to the coord define before
-    model.position.copy(coord.as(view.referenceCrs));
+    model.position.copy(coordinates.as(view.referenceCrs));
 
     //Align up vector with geodesic normal
-    model.lookAt(model.position.clone().add(coord.geodesicNormal));
+    model.lookAt(model.position.clone().add(coordinates.geodesicNormal));
 
     // user rotate building to align with ortho image
-    model.rotateZ(-Math.PI/12);
-    model.rotateX(Math.PI/2);
-    model.rotateY(Math.PI/8);
-    model.scale.set(0.002, 0.002, 0.002);
-
+    model.rotateZ(rotateZ);
+    model.rotateX(rotateX);
+    model.rotateY(rotateY);
+    model.scale.set(scaleX,scaleY,scaleZ);
 
     // update coordinate of the mesh
     model.updateMatrixWorld();
 
     view.scene.add(model);
-
-    //
-    //itowns.CameraUtils.sequenceAnimationsToLookAtTarget(view, camera, pathTravel);
 }
 
-loadGLTF();
+//Load Stade de France
+loadComplex('../data/aviva_stadium/scene.gltf',
+            new itowns.Coordinates('EPSG:4326',2.36,48.924444,46),
+            Math.PI/2,
+            Math.PI/8,
+            -Math.PI/12,
+            0.002, 0.002, 0.002);
