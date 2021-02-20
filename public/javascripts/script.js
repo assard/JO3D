@@ -1,6 +1,8 @@
+import {Complex} from './Complex.js'
+
 const viewerDiv = document.getElementById('viewerDiv');
 const position = {
-    coord: new itowns.Coordinates('EPSG:4326', 2.25359366707031848,84595076292729),
+    coord: new itowns.Coordinates('EPSG:4326', 2.253593667070318,48.84595076292729),
     range: 30000
 };
 const view = new itowns.GlobeView(viewerDiv, position);
@@ -36,57 +38,23 @@ const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
 view.addLayer(elevationLayer);
 
 
-async function loadComplex(dataPath,coords,rotateX,rotateY,rotateZ,scaleX,scaleY,scaleZ){
+//Load models
 
+const stadeDeFrance = new Complex('../data/aviva_stadium/scene.gltf',2.36,48.924444,46);
+const tennisCourt = new Complex('../data/aviva_stadium/scene.gltf',2.25,48.845950,46);
 
-    let gltf = await ThreeLoader.load('GLTF',dataPath);
-
-    //Base on the example https://github.com/iTowns/itowns/blob/master/examples/misc_collada.html
-
-    //Get the ThreeGroup
-    let model = gltf.scene;
-
-    let coord = new itowns.coordinates('EPSG:4326',coords.lng,coords.lat,coords.alt);
-
-
-    //Set the model position to the coord define before
-    model.position.copy(coord.as(view.referenceCrs));
-
-    //Align up vector with geodesic normal
-    model.lookAt(model.position.clone().add(coord.geodesicNormal));
-
-    // user rotate building to align with ortho image
-    model.rotateZ(rotateZ);
-    model.rotateX(rotateX);
-    model.rotateY(rotateY);
-    model.scale.set(scaleX,scaleY,scaleZ);
-
-    // update coordinate of the mesh
-    model.updateMatrixWorld();
-
-    view.scene.add(model);
+const rotateStdf = {
+    x: Math.PI/8,
+    y: -Math.PI/12,
+    z: Math.PI/2
 }
-
-//Load Stade de France
-
-stdfCoord = {
-    lng : 2.36,
-    lat : 48.924444,
-    alt : 46
+const scaleStdf = {
+    x: 0.002,
+    y: 0.002,
+    z: 0.002
 }
+stadeDeFrance.render(view,rotateStdf,scaleStdf);
 
-loadComplex('../data/aviva_stadium/scene.gltf',
-            stdfCoord,
-            Math.PI/2,
-            Math.PI/8,
-            -Math.PI/12,
-            0.002, 0.002, 0.002);
 
-//Load Tennis Court
-loadComplex('../data/aviva_stadium/scene.gltf',
-            new itowns.Coordinates('EPSG:4326', 2.25,48.845950,46),
-            Math.PI/2,
-            0,
-            0,
-            1, 1, 1);
+
 
