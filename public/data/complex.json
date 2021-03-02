@@ -1,0 +1,35 @@
+{
+    "complexes":[
+        {
+            "name":"Stade de France",
+            "sport":"Football",
+            "capacity":81000,
+            "url":"../data/aviva_stadium/scene.gltf",
+            "lng":48.924444,
+            "lat":2.36,
+            "alt":46,
+            "rotationX":1.57079632679,
+            "rotationY":0.39269908169,
+            "rotationZ":-0.26179938779,
+            "scaleX":0.002,
+            "scaleY":0.002,
+            "scaleZ":0.002
+        },{
+            "name":"Stade Roland-Garros",
+            "sport":"Tennis",
+            "capacity":15000,
+            "url":"../data/tennis_court_animation/scene.gltf",
+            "lng":48.847317290565265,
+            "lat":2.2465091924940035,
+            "alt":43,
+            "rotationX":1.57079632679,
+            "rotationY":1.25663706144,
+            "rotationZ":3.14159265359,
+            "scaleX":0.1,
+            "scaleY":0.1,
+            "scaleZ":0.1
+        }
+    ]
+
+    
+}
