@@ -4,10 +4,21 @@
         <meta charset="UTF-8">
         <title>Simple globe with iTowns</title>
         <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/LoadingScreen.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
      </head>
      <body>
         <div id="viewerDiv"></div>
         <script src="./javascripts/itowns/itowns.js"></script>
+        <script src="./javascripts/itowns/debug.js"></script>
+        <script src="./javascripts/GUI/GuiTools.js"></script>
+        <script src="./javascripts/GUI/LoadingScreen.js"></script>
+        <div id="description">
+            <p><b>Building Information</b></p>
+            <ul id="info">
+            </ul>
+         </div>
         <script src="./javascripts/test.js"></script>
      </body>
 </html>
