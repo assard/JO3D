@@ -64,6 +64,8 @@ class Complex {
         button.innerHTML = this.name;
         button.addEventListener('click',()=>{
             this.zoomTo(viewer);
+            const ulInfoComplexes = document.getElementById('ulInfoComplexes');
+            this.showInfos(ulInfoComplexes);
         });
         li.appendChild(button);
     }
@@ -74,9 +76,29 @@ class Complex {
      * @param {Object} viewer - The itowns viewer where the data are rendered
      */
     zoomTo(viewer){
-        let pathTravel = [{ coord: new itowns.Coordinates('EPSG:4326',this.lng,this.lat,this.alt), range: 2000, time: 4000 }];
-        var camera = viewer.camera.camera3D;
+        const pathTravel = [{ coord: new itowns.Coordinates('EPSG:4326',this.lng,this.lat,this.alt), range: 2000, time: 4000 }];
+        const camera = viewer.camera.camera3D;
         itowns.CameraUtils.sequenceAnimationsToLookAtTarget(viewer, camera, pathTravel);
+    }
+
+    /**
+     * Show the informations of the complex on a the div which show informations
+     * 
+     * @param {Object} ulInfos - ul element where we will show the informations
+     */
+    showInfos(ulInfos){
+        // Clear the ul if previous element are stored on it
+        while(ulInfos.firstChild) {    
+            ulInfos.removeChild(ulInfos.firstChild);
+        }
+        // For the attribute sport,name and capacity (currently), add a li with the attributes and its values
+        for (const attribute in this) {
+            if (['name','sport','capacity'].includes(attribute)) {
+                const li = document.createElement('li');
+                li.innerText = `${attribute} : ${this[attribute]}` ;
+                ulInfos.appendChild(li);
+            }            
+        }
     }
 }
 
