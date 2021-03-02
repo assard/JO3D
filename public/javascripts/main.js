@@ -24,7 +24,8 @@ function colorBuildings(properties) {
 function addElevationLayerFromConfig(config) {
     config.source = new itowns.WMTSSource(config.source);
     var layer = new itowns.ElevationLayer(config.id, config);
-    view.addLayer(layer).then(menuGlobe.addLayerGUI.bind(menuGlobe));
+    view.addLayer(layer)
+    .then(menuGlobe.addLayerGUI.bind(menuGlobe));
 }
 
 function altitudeBuildings(properties) {
@@ -87,11 +88,13 @@ function picking(event) {
  * For each complex in the file complex.json, an object complex is created and render on the viewer
  */
 async function loadComplex(){
-    let complexesLoading = await fetch('../data/complex.json');
-    let complexes = await complexesLoading.json();
+    const complexesLoading = await fetch('../data/complex.json');
+    const complexes = await complexesLoading.json();
+    const ulComplexes = document.getElementById('ulComplexes');
     for (const c of complexes["complexes"]) {
-        let complex = new Complex(c.url,c.lat,c.lng,c.alt,c.rotationX,c.rotationY,c.rotationZ,c.scaleX,c.scaleY,c.scaleZ,c.name,c.sport,c.capacity);
+        const complex = new Complex(c.url,c.lat,c.lng,c.alt,c.rotationX,c.rotationY,c.rotationZ,c.scaleX,c.scaleY,c.scaleZ,c.name,c.sport,c.capacity);
         complex.render(view);
+        complex.addComplexOnInfoMenu(ulComplexes,view);
     }
 }
 
@@ -182,25 +185,25 @@ view.addEventListener(itowns.GLOBE_VIEW_EVENTS.GLOBE_INITIALIZED, function () {
 
 debug.createTileDebugUI(menuGlobe.gui, view);
 
-
+let gui;
 
 for (var layer of view.getLayers()) {
     if (layer.id === 'WFS Bus lines') {
         layer.whenReady.then( function _(layer) {
-            var gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
+            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
             debug.GeometryDebug.addMaterialLineWidth(gui, view, layer, 1, 10);
         });
     }
     if (layer.id === 'WFS Building') {
         layer.whenReady.then( function _(layer) {
-            var gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
+            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
             debug.GeometryDebug.addWireFrameCheckbox(gui, view, layer);
             window.addEventListener('mousemove', picking, false);
         });
     }
     if (layer.id === 'WFS Route points') {
         layer.whenReady.then( function _(layer) {
-            var gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
+            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
             debug.GeometryDebug.addMaterialSize(gui, view, layer, 1, 200);
         });
     }
@@ -208,4 +211,10 @@ for (var layer of view.getLayers()) {
 
 // Loading gltf models
 loadComplex();
+
+
+
+
+
+
 
