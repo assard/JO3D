@@ -2,7 +2,7 @@
     "complexes":[
         {
             "name":"Stade de France",
-            "sport":"Football",
+            "sport":"Football, Athlétisme",
             "capacity":81000,
             "url":"../data/aviva_stadium/scene.gltf",
             "lng":48.924444,
