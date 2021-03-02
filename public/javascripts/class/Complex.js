@@ -49,6 +49,35 @@ class Complex {
         // add model to the viewer
         viewer.scene.add(model);
     }
+
+    /**
+     * Add the name of the complex on the menu which show data information
+     * If the user click on this name, the camera ill zoom to it
+     * 
+     * @param {Object} ulMenu - The ul element where the name will be put
+     * @param {Object} viewer - The itowns viewer where the data are rendered
+     */
+    addComplexOnInfoMenu(ulMenu,viewer){
+        const li = document.createElement('li');
+        ulMenu.appendChild(li);
+        const button = document.createElement('button');
+        button.innerHTML = this.name;
+        button.addEventListener('click',()=>{
+            this.zoomTo(viewer);
+        });
+        li.appendChild(button);
+    }
+
+    /**
+     * Zoom the camera to the complex
+     * 
+     * @param {Object} viewer - The itowns viewer where the data are rendered
+     */
+    zoomTo(viewer){
+        let pathTravel = [{ coord: new itowns.Coordinates('EPSG:4326',this.lng,this.lat,this.alt), range: 2000, time: 4000 }];
+        var camera = viewer.camera.camera3D;
+        itowns.CameraUtils.sequenceAnimationsToLookAtTarget(viewer, camera, pathTravel);
+    }
 }
 
 export {Complex}
