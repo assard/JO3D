@@ -1,4 +1,14 @@
+//*********************************************************************************************************************************** */
+// Import
+//*********************************************************************************************************************************** */
+
 import {Complex} from './Complex.js'
+
+
+//*********************************************************************************************************************************** */
+// Main
+//*********************************************************************************************************************************** */
+
 
 const viewerDiv = document.getElementById('viewerDiv');
 const position = {
@@ -38,22 +48,13 @@ const elevationLayer = new itowns.ElevationLayer('MNT_WORLD', {
 view.addLayer(elevationLayer);
 
 
-//Load models
+// Load models
 
-const stadeDeFrance = new Complex('../data/aviva_stadium/scene.gltf',2.36,48.924444,46);
-const tennisCourt = new Complex('../data/aviva_stadium/scene.gltf',2.25,48.845950,46);
+const stadeDeFrance = new Complex('../data/aviva_stadium/scene.gltf',2.36,48.924444,46,Math.PI/2,Math.PI/8,-Math.PI/12,0.002,0.002,0.002);
+const tennisCourt = new Complex('../data/tennis_court_animation/scene.gltf',2.2465091924940035,48.847317290565265,43,Math.PI/2,Math.PI/2.5,Math.PI,0.1,0.1,0.1);
 
-const rotateStdf = {
-    x: Math.PI/8,
-    y: -Math.PI/12,
-    z: Math.PI/2
-}
-const scaleStdf = {
-    x: 0.002,
-    y: 0.002,
-    z: 0.002
-}
-stadeDeFrance.render(view,rotateStdf,scaleStdf);
+stadeDeFrance.render(view);
+tennisCourt.render(view);
 
 
 

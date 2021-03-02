@@ -1,12 +1,18 @@
 class Complex {
-    constructor(url,lng,lat,alt,){
+    constructor(url,lng,lat,alt,rotationX,rotationY,rotationZ,scaleX,scaleY,scaleZ){
         this.url = url,
         this.lng = lng,
         this.lat = lat,
-        this.alt = alt
+        this.alt = alt,
+        this.rotationX = rotationX,
+        this.rotationY = rotationY,
+        this.rotationZ = rotationZ,
+        this.scaleX = scaleX,
+        this.scaleY = scaleY,
+        this.scaleZ = scaleZ
     }
 
-    async render(viewer,rotation,scale){
+    async render(viewer){
         let gltf = await ThreeLoader.load('GLTF',this.url);
 
         //Base on the example https://github.com/iTowns/itowns/blob/master/examples/misc_collada.html
@@ -14,7 +20,7 @@ class Complex {
         //Get the ThreeGroup
         let model = gltf.scene;
 
-        let coord = new itowns.coordinates('EPSG:4326',this.lng,this.lat,this.alt);
+        let coord = new itowns.Coordinates('EPSG:4326',this.lng,this.lat,this.alt);
 
         //Set the model position to the coord define before
         model.position.copy(coord.as(viewer.referenceCrs));
@@ -23,10 +29,10 @@ class Complex {
         model.lookAt(model.position.clone().add(coord.geodesicNormal));
 
         // user rotate building to align with ortho image
-        model.rotateZ(rotation.z);
-        model.rotateX(rotation.x);
-        model.rotateY(rotation.z);
-        model.scale.set(scale.x,scale.y,scale.z);
+        model.rotateZ(this.rotationZ);
+        model.rotateX(this.rotationX);
+        model.rotateY(this.rotationY);
+        model.scale.set(this.scaleX,this.scaleY,this.scaleZ);
 
         // update coordinate of the mesh
         model.updateMatrixWorld();
