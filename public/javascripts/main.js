@@ -198,7 +198,7 @@ for (var layer of view.getLayers()) {
         layer.whenReady.then( function _(layer) {
             gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
             debug.GeometryDebug.addWireFrameCheckbox(gui, view, layer);
-            window.addEventListener('mousemove', picking, false);
+            // window.addEventListener('mousemove', picking, false);
         });
     }
     if (layer.id === 'WFS Route points') {
