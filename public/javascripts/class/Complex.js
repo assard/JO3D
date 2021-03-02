@@ -81,10 +81,17 @@ class Complex {
         itowns.CameraUtils.sequenceAnimationsToLookAtTarget(viewer, camera, pathTravel);
     }
 
+    /**
+     * Show the informations of the complex on a the div which show informations
+     * 
+     * @param {Object} ulInfos - ul element where we will show the informations
+     */
     showInfos(ulInfos){
+        // Clear the ul if previous element are stored on it
         while(ulInfos.firstChild) {    
             ulInfos.removeChild(ulInfos.firstChild);
         }
+        // For the attribute sport,name and capacity (currently), add a li with the attributes and its values
         for (const attribute in this) {
             if (['name','sport','capacity'].includes(attribute)) {
                 const li = document.createElement('li');
