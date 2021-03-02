@@ -1,5 +1,5 @@
 class Complex {
-    constructor(url,lng,lat,alt,rotationX,rotationY,rotationZ,scaleX,scaleY,scaleZ){
+    constructor(url,lng,lat,alt,rotationX,rotationY,rotationZ,scaleX,scaleY,scaleZ,name,sport,capacity){
         this.url = url,
         this.lng = lng,
         this.lat = lat,
@@ -9,7 +9,10 @@ class Complex {
         this.rotationZ = rotationZ,
         this.scaleX = scaleX,
         this.scaleY = scaleY,
-        this.scaleZ = scaleZ
+        this.scaleZ = scaleZ,
+        this.name = name,
+        this.sport = sport,
+        this.capacity = capacity
     }
 
     async render(viewer){

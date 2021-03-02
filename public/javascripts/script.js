@@ -4,6 +4,7 @@
 
 import {Complex} from './Complex.js'
 
+
 //*********************************************************************************************************************************** */
 // Main
 //*********************************************************************************************************************************** */
@@ -200,8 +201,14 @@ for (var layer of view.getLayers()) {
 
 // Load models
 
-const stadeDeFrance = new Complex('../data/aviva_stadium/scene.gltf',2.36,48.924444,46,Math.PI/2,Math.PI/8,-Math.PI/12,0.002,0.002,0.002);
-const tennisCourt = new Complex('../data/tennis_court_animation/scene.gltf',2.2465091924940035,48.847317290565265,43,Math.PI/2,Math.PI/2.5,Math.PI,0.1,0.1,0.1);
+async function loadComplex(){
+    let complexesLoading = await fetch('../data/complex.json');
+    let complexes = await complexesLoading.json();
+    for (const c of complexes["complexes"]) {
+        let complex = new Complex(c.url,c.lat,c.lng,c.alt,c.rotationX,c.rotationY,c.rotationZ,c.scaleX,c.scaleY,c.scaleZ,c.name,c.sport,c.capacity);
+        complex.render(view);
+    }
+}
 
-stadeDeFrance.render(view);
-tennisCourt.render(view);
+loadComplex();
+
