@@ -2,7 +2,7 @@
 // Import
 //*********************************************************************************************************************************** */
 
-import {Complex} from './Complex.js'
+import {Complex} from './class/Complex.js'
 
 //*********************************************************************************************************************************** */
 // Functions
@@ -82,6 +82,10 @@ function picking(event) {
     }
 }
 
+/**
+ * Load the gltf models of the sports complexes
+ * For each complex in the file complex.json, an object complex is created and render on the viewer
+ */
 async function loadComplex(){
     let complexesLoading = await fetch('../data/complex.json');
     let complexes = await complexesLoading.json();
@@ -129,8 +133,8 @@ const colorLayer = new itowns.ColorLayer('Ortho', {
 view.addLayer(colorLayer);
 
 
-itowns.Fetcher.json('javascripts/layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
-itowns.Fetcher.json('javascripts/layers/JSONLayers/IGN_MNT_HIGHRES.json').then(addElevationLayerFromConfig);
+itowns.Fetcher.json('data/layers/JSONLayers/WORLD_DTM.json').then(addElevationLayerFromConfig);
+itowns.Fetcher.json('data/layers/JSONLayers/IGN_MNT_HIGHRES.json').then(addElevationLayerFromConfig);
 
 const color = new itowns.THREE.Color();
 
@@ -202,6 +206,6 @@ for (var layer of view.getLayers()) {
     }
 }
 
-// Load models
+// Loading gltf models
 loadComplex();
 

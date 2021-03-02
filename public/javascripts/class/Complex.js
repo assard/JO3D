@@ -15,6 +15,11 @@ class Complex {
         this.capacity = capacity
     }
 
+    /**
+     * Render the complex on the viewer
+     * 
+     * @param {Object} viewer - Viewer itowns where we want to render the complex
+     */
     async render(viewer){
         let gltf = await ThreeLoader.load('GLTF',this.url);
 
@@ -23,6 +28,7 @@ class Complex {
         //Get the ThreeGroup
         let model = gltf.scene;
 
+        //coords of the complex 
         let coord = new itowns.Coordinates('EPSG:4326',this.lng,this.lat,this.alt);
 
         //Set the model position to the coord define before
@@ -40,6 +46,7 @@ class Complex {
         // update coordinate of the mesh
         model.updateMatrixWorld();
 
+        // add model to the viewer
         viewer.scene.add(model);
     }
 }
