@@ -23,7 +23,7 @@ Ce projet a été réalisé avec les versions suivantes :
 - node 10
 - npm 6
 
-Celui-ci se rend disponible sur le port 3000 d'un serveur local. Vérifiez donc au préalable que celui-ci est disponible. 
+Celui-ci se rend disponible sur le port 3000 d'un serveur local. Vérifiez donc au préalable que de port est disponible. 
 
 Pour installer les dépendances : 
 
