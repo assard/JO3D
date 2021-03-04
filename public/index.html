@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JO3D</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/LoadingScreen.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+     </head>
+     <body>
+        <div id="viewerDiv"></div>
+        <script src="./javascripts/libraries/itowns/itowns.js"></script>
+        <script src="./javascripts/libraries/itowns/debug.js"></script>
+        <script src="./javascripts/libraries/ThreeLoader.js"></script>
+        <script src="./javascripts/libraries/GUI/GuiTools.js"></script>
+        <script src="./javascripts/libraries/GUI/LoadingScreen.js"></script>
+        <div id="description">
+            <p><b>List of sports complexes</b></p>
+            <ul id="info">
+            </ul>
+            <ul id='ulComplexes'></ul>
+            <p>Complexes informations</p>
+            <ul id='ulInfoComplexes'></ul>
+         </div>
+        <script type='module' src="./javascripts/main.js"></script>
+     </body>
+</html>
