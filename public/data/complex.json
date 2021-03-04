@@ -2,7 +2,7 @@
     "complexes":[
         {
             "name":"Stade de France",
-            "sport":"Football, Athlétisme",
+            "sport":"Football, Athletisme",
             "capacity":81000,
             "url":"../data/gltf/aviva_stadium/scene.gltf",
             "lng":48.924444,
@@ -21,13 +21,13 @@
             "url":"../data/gltf/tennis_court_animation/scene.gltf",
             "lng":48.847317290565265,
             "lat":2.2465091924940035,
-            "alt":43,
+            "alt":37,
             "rotationX":1.57079632679,
             "rotationY":1.25663706144,
             "rotationZ":3.14159265359,
-            "scaleX":0.1,
-            "scaleY":0.1,
-            "scaleZ":0.1
+            "scaleX":0.08,
+            "scaleY":0.08,
+            "scaleZ":0.08
         }
     ]
 
