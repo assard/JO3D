@@ -21,7 +21,7 @@ class Complex {
      * @param {Object} viewer - Viewer itowns where we want to render the complex
      */
     async render(viewer){
-        let gltf = await ThreeLoader.load('GLTF',this.url);
+        let gltf = await ThreeLoader.load('GLTF',this.url).catch(err => console.log(err));
 
         //Base on the example https://github.com/iTowns/itowns/blob/master/examples/misc_collada.html
 
