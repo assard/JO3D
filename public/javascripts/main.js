@@ -83,6 +83,9 @@ async function loadComplex(){
     const complexesLoading = await fetch('../data/complex.json');
     const complexes = await complexesLoading.json();
     const ulComplexes = document.getElementById('ulComplexes');
+    ulComplexes.style.listStyle = "none";
+    ulComplexes.style.marginLeft = "0";
+    ulComplexes.style.paddingLeft = "0";
     for (const c of complexes["complexes"]) {
         const complex = new Complex(c.url,c.lat,c.lng,c.alt,c.rotationX,c.rotationY,c.rotationZ,c.scaleX,c.scaleY,c.scaleZ,c.name,c.sport,c.capacity);
         complex.render(view);
