@@ -37,7 +37,7 @@ Pour lancer le serveur :
 
 Vous pouvez maintenant utiliser l'application en vous rendant sur http://localhost:3000. 
 
-Vous pouvez également visualiser une vidéo de démonstration au lien suivant : https://github.com/assard/JO3D/blob/assets/screenshot_demo.png
+Vous pouvez également visualiser une vidéo de démonstration au lien suivant : https://github.com/assard/JO3D/blob/assets/demonstration.mp4
 
 ## Source de données 
 
