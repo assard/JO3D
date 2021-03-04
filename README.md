@@ -5,13 +5,7 @@ Il s'agit d'une application interactive 3D pour les Jeux Olympiques de Paris 202
 
 ![Capture écran de l'application](../assets/screenshot_demo.png)
 
-## Utilisation du projet
-
-Pour utiliser le projet, rendez-vous au lien suivant : https://assard.github.io/
-
-Pour voir une démonstration, rendez-vous au lien suivant : 
-
-## Installation et utilisation du code source
+## Installation et utilisation 
 
 1. Décompression des fichiers gltf
 
@@ -29,6 +23,8 @@ Ce projet a été réalisé avec les versions suivantes :
 - node 10
 - npm 6
 
+Celui-ci se rend disponible sur le port 3000 d'un serveur local. Vérifiez donc au préalable que celui-ci est disponible. 
+
 Pour installer les dépendances : 
 
     npm install
@@ -37,7 +33,11 @@ Pour lancer le serveur :
 
     npm start
 
+3. Utilisation
 
+Vous pouvez maintenant utiliser l'application en vous rendant sur http://localhost:3000. 
+
+Vous pouvez également visualiser une vidéo de démonstration au lien suivant : 
 
 ## Source de données 
 
