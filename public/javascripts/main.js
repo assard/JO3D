@@ -24,8 +24,7 @@ function colorBuildings(properties) {
 function addElevationLayerFromConfig(config) {
     config.source = new itowns.WMTSSource(config.source);
     var layer = new itowns.ElevationLayer(config.id, config);
-    view.addLayer(layer)
-    .then(menuGlobe.addLayerGUI.bind(menuGlobe));
+    view.addLayer(layer);
 }
 
 function altitudeBuildings(properties) {
@@ -175,39 +174,6 @@ const wfsBuildingLayer = new itowns.GeometryLayer('WFS Building', new itowns.THR
     zoom: { min: 14 },
 });
 view.addLayer(wfsBuildingLayer);
-
-const menuGlobe = new GuiTools('menuDiv', view);
-// Listen for globe full initialisation event
-view.addEventListener(itowns.GLOBE_VIEW_EVENTS.GLOBE_INITIALIZED, function () {
-    // eslint-disable-next-line no-console
-    console.info('Globe initialized');
-});
-
-debug.createTileDebugUI(menuGlobe.gui, view);
-
-let gui;
-
-for (var layer of view.getLayers()) {
-    if (layer.id === 'WFS Bus lines') {
-        layer.whenReady.then( function _(layer) {
-            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
-            debug.GeometryDebug.addMaterialLineWidth(gui, view, layer, 1, 10);
-        });
-    }
-    if (layer.id === 'WFS Building') {
-        layer.whenReady.then( function _(layer) {
-            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
-            debug.GeometryDebug.addWireFrameCheckbox(gui, view, layer);
-            // window.addEventListener('mousemove', picking, false);
-        });
-    }
-    if (layer.id === 'WFS Route points') {
-        layer.whenReady.then( function _(layer) {
-            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
-            debug.GeometryDebug.addMaterialSize(gui, view, layer, 1, 200);
-        });
-    }
-}
 
 // Loading gltf models
 loadComplex();
