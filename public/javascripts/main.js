@@ -121,7 +121,8 @@ const colorSource = new itowns.WMTSSource({
     crs: 'EPSG:3857',
     name: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGN',
     tileMatrixSet: 'PM',
-    format: 'image/jpeg'
+    format: 'image/jpeg',
+    zoom: { min : 2, max : 18 }
 });
 
 const colorLayer = new itowns.ColorLayer('Ortho', {
