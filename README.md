@@ -3,7 +3,7 @@ Cette application est issu d'un projet que nous avons réalisés lors de notre 3
 
 Il s'agit d'une application interactive 3D pour les Jeux Olympiques de Paris 2024. Son objectif est de pouvoir visualiser des lieux qui seront utilisés lors des JO et avoir des informations dessus.
 
-
+![Capture écran de l'application](../assets/screenshot_demo.png)
 
 ## Utilisation
 
