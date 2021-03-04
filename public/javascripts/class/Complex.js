@@ -61,6 +61,9 @@ class Complex {
         const li = document.createElement('li');
         ulMenu.appendChild(li);
         const button = document.createElement('button');
+        button.className = "btn btn-secondary";
+        button.style.marginTop = "2px";
+        button.style.marginBottom = "2px";
         button.innerHTML = this.name;
         button.addEventListener('click',()=>{
             this.zoomTo(viewer);

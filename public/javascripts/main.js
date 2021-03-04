@@ -9,13 +9,6 @@ import {Complex} from './class/Complex.js'
 //*********************************************************************************************************************************** */
 
 function colorBuildings(properties) {
-    if (properties.id.indexOf('bati_remarquable') === 0) {
-        return color.set(0x5555ff);
-    } else if (properties.id.indexOf('bati_industriel') === 0) {
-        return color.set(0xff5555);
-    } else if (properties.id.indexOf('terrain_sport') === 0) {
-        return color.set(0x55ff55);
-    }
     return color.set(0xeeeeee);
 }
 
@@ -24,8 +17,7 @@ function colorBuildings(properties) {
 function addElevationLayerFromConfig(config) {
     config.source = new itowns.WMTSSource(config.source);
     var layer = new itowns.ElevationLayer(config.id, config);
-    view.addLayer(layer)
-    .then(menuGlobe.addLayerGUI.bind(menuGlobe));
+    view.addLayer(layer);
 }
 
 function altitudeBuildings(properties) {
@@ -91,6 +83,9 @@ async function loadComplex(){
     const complexesLoading = await fetch('../data/complex.json');
     const complexes = await complexesLoading.json();
     const ulComplexes = document.getElementById('ulComplexes');
+    ulComplexes.style.listStyle = "none";
+    ulComplexes.style.marginLeft = "0";
+    ulComplexes.style.paddingLeft = "0";
     for (const c of complexes["complexes"]) {
         const complex = new Complex(c.url,c.lat,c.lng,c.alt,c.rotationX,c.rotationY,c.rotationZ,c.scaleX,c.scaleY,c.scaleZ,c.name,c.sport,c.capacity);
         complex.render(view);
@@ -175,39 +170,6 @@ const wfsBuildingLayer = new itowns.GeometryLayer('WFS Building', new itowns.THR
     zoom: { min: 14 },
 });
 view.addLayer(wfsBuildingLayer);
-
-const menuGlobe = new GuiTools('menuDiv', view);
-// Listen for globe full initialisation event
-view.addEventListener(itowns.GLOBE_VIEW_EVENTS.GLOBE_INITIALIZED, function () {
-    // eslint-disable-next-line no-console
-    console.info('Globe initialized');
-});
-
-debug.createTileDebugUI(menuGlobe.gui, view);
-
-let gui;
-
-for (var layer of view.getLayers()) {
-    if (layer.id === 'WFS Bus lines') {
-        layer.whenReady.then( function _(layer) {
-            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
-            debug.GeometryDebug.addMaterialLineWidth(gui, view, layer, 1, 10);
-        });
-    }
-    if (layer.id === 'WFS Building') {
-        layer.whenReady.then( function _(layer) {
-            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
-            debug.GeometryDebug.addWireFrameCheckbox(gui, view, layer);
-            // window.addEventListener('mousemove', picking, false);
-        });
-    }
-    if (layer.id === 'WFS Route points') {
-        layer.whenReady.then( function _(layer) {
-            gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
-            debug.GeometryDebug.addMaterialSize(gui, view, layer, 1, 200);
-        });
-    }
-}
 
 // Loading gltf models
 loadComplex();
