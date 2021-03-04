@@ -9,13 +9,6 @@ import {Complex} from './class/Complex.js'
 //*********************************************************************************************************************************** */
 
 function colorBuildings(properties) {
-    if (properties.id.indexOf('bati_remarquable') === 0) {
-        return color.set(0x5555ff);
-    } else if (properties.id.indexOf('bati_industriel') === 0) {
-        return color.set(0xff5555);
-    } else if (properties.id.indexOf('terrain_sport') === 0) {
-        return color.set(0x55ff55);
-    }
     return color.set(0xeeeeee);
 }
 
