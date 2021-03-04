@@ -121,7 +121,8 @@ const colorSource = new itowns.WMTSSource({
     crs: 'EPSG:3857',
     name: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGN',
     tileMatrixSet: 'PM',
-    format: 'image/jpeg'
+    format: 'image/jpeg',
+    zoom: { min : 2, max : 18 }
 });
 
 const colorLayer = new itowns.ColorLayer('Ortho', {
@@ -141,7 +142,7 @@ view.addFrameRequester(itowns.MAIN_LOOP_EVENTS.BEFORE_RENDER, scaler);
 const wfsBuildingSource = new itowns.WFSSource({
     url: 'https://wxs.ign.fr/3ht7xcw6f7nciopo16etuqp2/geoportail/wfs?',
     version: '2.0.0',
-    typeName: 'BDTOPO_BDD_WLD_WGS84G:bati_remarquable,BDTOPO_BDD_WLD_WGS84G:bati_indifferencie,BDTOPO_BDD_WLD_WGS84G:bati_industriel,BDTOPO_BDD_WLD_WGS84G:terrain_sport',
+    typeName: 'BDTOPO_BDD_WLD_WGS84G:bati_indifferencie,BDTOPO_BDD_WLD_WGS84G:bati_industriel,BDTOPO_BDD_WLD_WGS84G:terrain_sport',
     crs: 'EPSG:4326',
     ipr: 'IGN',
     format: 'application/json',
